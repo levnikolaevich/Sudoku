@@ -1,0 +1,71 @@
+@Version 	1.4.1
+@Date		Wednesday, September 16, 2015
+@Author		Dorin Grigoras
+	* Update: Fontawesome to V4.4.0 (changes: assets/css/font-awesome.css , assets/fonts/fontawesome-*)
+	* Fix: Mega Menu Width - for latest Chrome (changes: assets/css/header-*.css - #topNav ul.nav>li.mega-menu div.row { width:100%; } )
+
+
+@Version 	1.4
+@Date		Wednesday, July 22, 2015
+@Author		Dorin Grigoras
+	* Update: jQuery to Version 2.1.4 (changes: replaced - jquery-2.1.4.min.js ,  jquery-2.1.4.min.map, all HTML files)
+	* Update: Bootstrap to Version 3.3.5 (changes: replaced assets/plugins/bootstrap)
+	* Update: Magnific Popup to Version 1.0.0 (changes: replace assets/plugins/magnific-popup/)
+	* Update: Layerslider to 5.5.0 (changes: replaced assets/plugins/layerslider)
+	* Fix: sky-form centered (changes:  assets/css/sky-forms.css)
+	* Fix: sky-form file input (changes: page-user-profile.html)
+	* Fix: sticky menu max-height on mobiles (changes: assets/css/layout.css)
+
+
+@Version 	1.3
+@Date		Monday, March 09, 2015
+@Author		Dorin Grigoras
+	* New: Left Side Main Menu (changes: added index-home-13.html & assets/css/header-side.css)
+	* Update: Bootstrap to Version 3.3.2 (changes: replaced assets/plugins/bootstrap)
+	* Update: jQuery to Version 2.1.3 (changes: replaced - jquery-2.1.3.min.js ,  jquery-2.1.3.min.map)
+	* Update: Revolution Slider to 4.6.4 (changes: replaced - assets/plugins/revolution-slider)
+	* Update: OWL Carousel to Version 1.3.2 (changes: replaced assets/plugins/owl-carousel/owl.carousel.min.js)
+	* Update Fontawesome to Version 4.3 (changes: replaced assets/css/font-awesome.css and assets/fonts/FontAwesome*)		
+	* Fix: clickable first main menu link if href is not # (changes: assets/js/scripts.js)
+
+@Version 	1.2
+@Date		Friday, September 26, 2014
+@Author		Dorin Grigoras
+	* Update: Bootstrap 3.3.1
+	* New: page-search.html (changes: assets/css/layout.css - "misc" section)
+	* New: page-clients.html
+	* New: Bootstrap tables (changes: added shortcodes-tables-default.html)
+	* New: jQuery Grid Table (changes: added assets/plugins/jqgrid/)
+	* New: Footable Table (changes: added assets/plugins/jquery-footable/ , assets/css/layout.css - "misc" section)
+	* New: Summernote HTML Editor (changes: added assets/plugins/html_summernote/, assets/css/layout-dark.css, assets/css/essentials.css)
+	* New: Markdown Editor (changes: added assets/pluginshtml_markdown/, assets/css/essentials.css)
+	* New: Added standard web colors to essentials.css (http://clrs.cc/)
+	* Revolution Slider Update - 4.6.0 (changes: replaced assets/plugins/revolution-slider/ and documentation)
+	*** Revolution Slider Tools Renamed by the Vendor: jquery.themepunch.plugins.min.js -to- jquery.themepunch.tools.min.js (changes: all .html files)
+	* Layer Slider Update - 5.2.0  (changes: replaced assets/plugins/layerslider/ and documentation)
+	* Sticky header avaibale for index-home-8.html (changes: assets/js/scripts.js)
+	* Fixed shop widget if title missing (assets/css/header-*.css)
+	* Fixed menu background on dark layout (changes: assets/css/ayout-dark.css)
+	* Added variable delay to .word-rotator using data-delay="3000" in ms  (default is 2000ms) (changes: assets/js/scripts.js)
+	* Added Datepicker (also used by jqgrid) (changes: assets/js/scripts.js , assets/css/essentials.css)
+	* Added .greyscale class option to google map - remove the class for color google map (changes: contact-*.html , assets/css/layout.css)
+
+@Version 	1.1
+@Date		Saturday, August 2, 2014
+@Author		Dorin Grigoras
+	* Added Ion Range Sliders (changes: assets/plugins/ion-range-slider/ , essentials.css, scripts.js)
+	* Removed bootstrap-slider (changes: scripts.js)
+	* IE Bugfixes, sticky header on boxed version (changes: assets/js/scripts.js , assets/css/layout.css)
+	* Fixed Knob Circular Bar position on IE (changes: essentials.css , essentials.less)
+	* Working PHP Newsletter, Contact Forms (changes: assets/js/scripts.js, contact-*.html)
+	* Portfolio hover color fixed to match color scheme (changes: assets/css/color_scheme/*)
+	* Layer Slider Update to 5.1.2 (changes: assets/plugins/layerslider)
+	* changed appear animation delay to 0 for iPad/iPhone (changes: assets/js/scripts.js)
+	* fixed video carousel & knob IE (changes: assets/css/essentials.css, essentials.less - added class: .bottom-pagination to .owl-carousel to fix spaces)
+	* fixed mobile menu color on dark version (beta) (changes: essentials.css , essentials.less)
+
+
+@Version 	1.0
+@Date		Monday, July 21, 2014
+@Author		Dorin Grigoras
+	* Initial Release

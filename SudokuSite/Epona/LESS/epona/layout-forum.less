@@ -1,0 +1,42 @@
+/** Forum
+ **************************************************************** **/
+.table-forum>thead tr th {
+	font-size:17px;
+	font-weight:400;
+	border-bottom-color:#F1F1F1;
+}
+.table-forum tr td {
+	border-top-style:dashed!important;
+	padding-top:12px!important;
+	padding-bottom:12px!important;
+}
+
+.table-forum tr td h4 {
+	font-size:15px;
+	font-weight:700;
+}
+
+.table-forum tr td h4 small {
+	font-size:13px;
+	display:block;
+	margin-top:2px;
+}
+
+.table-forum tr td>i {
+	margin-top:4px;
+	padding-left:10px;
+}
+
+.table-forum tr.locked h4>a:before {
+	content:"\f023";
+	font-family:FontAwesome;
+	display:inline-block;
+	font-style:normal;
+	font-weight:400;
+}
+
+.table-forum tr.closed h4>a {
+	text-decoration:line-through;
+	color:#838383;
+	cursor:not-allowed;
+}
