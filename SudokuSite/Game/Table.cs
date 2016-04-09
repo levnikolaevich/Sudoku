@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SudokuSite.Models;
 
 namespace SudokuSite.Game
 {
@@ -20,7 +21,7 @@ namespace SudokuSite.Game
                 {
                     int value = (x * n + x / n + y) % (n * n) + 1;
 
-                    Point p = new Point(x, y, value, true, this);
+                    Point p = new Point();
                     p.HorizontalBlock = x;
                     p.VerticalBlock = y;
                     p.HorizontalArea = x / 3;

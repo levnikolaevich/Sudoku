@@ -5,13 +5,13 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="1dc0bead353a46988d7da0d9a298bb7d" Name="Diagram1">
-        <EntityTypeShape EntityType="db_sudokuModel.Field" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_sudokuModel.Game" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_sudokuModel.Point" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_sudokuModel.User" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="db_sudokuModel.FK_Game_1" ManuallyRouted="false" />
-        <AssociationConnector Association="db_sudokuModel.FK_Point_0" ManuallyRouted="false" />
-        <AssociationConnector Association="db_sudokuModel.FK_Game_0" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="db_sudokuModel.Game" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="db_sudokuModel.Level" Width="1.5" PointX="0.75" PointY="5.5" />
+        <EntityTypeShape EntityType="db_sudokuModel.Point" Width="1.5" PointX="5.25" PointY="1" />
+        <EntityTypeShape EntityType="db_sudokuModel.User" Width="1.5" PointX="0.75" PointY="1.25" />
+        <AssociationConnector Association="db_sudokuModel.FK_Game_0" />
+        <AssociationConnector Association="db_sudokuModel.FK_Game_1" />
+        <AssociationConnector Association="db_sudokuModel.FK_Point_0" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

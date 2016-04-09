@@ -3,10 +3,10 @@
 <!--[if IE 9]>			<html class="ie ie9"> <![endif]-->
 <!--[if gt IE 9]><!-->
 <html>
- <!--<![endif]-->
+<!--<![endif]-->
 <head>
     <meta charset="utf-8" />
-    <title>Epona - Multipurpose Template</title>
+    <title>Судоку для Fincase</title>
     <meta name="keywords" content="HTML5,CSS3,Template" />
     <meta name="description" content="" />
     <meta name="Author" content="Dorin Grigoras [www.stepofweb.com]" />
@@ -15,8 +15,8 @@
     <!-- mobile settings -->
     <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
     <!-- Favicon -->
-    <link rel="shortcut icon" href="/assets/images/demo/favicon.ico" />
-
+    <link rel="shortcut icon" href="/assets/images/demo/favicon.png" />
+    
     <!-- WEB FONTS -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800&amp;subset=latin,latin-ext,cyrillic,cyrillic-ext" rel="stylesheet" type="text/css" />
 
@@ -70,7 +70,7 @@
             <header id="topBar">
                 <div class="container">
 
-                    <div class="pull-right fsize13 margin-top10 hide_mobile">
+                    <div class="pull-right fsize13 margin-top20 hide_mobile">
 
                         <!-- mail , phone -->
                         <a href="mailto:levnikolaevich@ya.ru">levnikolaevich@ya.ru</a> &bull; +79153297957
@@ -110,22 +110,36 @@
                                 </li>
                             -->
                             <ul id="topMain" class="nav nav-pills nav-main">
-                                <li>
-                                    <a href="@Url.Action("Index","Home")">
-                                        Войти
-                                    </a>
+                               
+                             
+                        
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    @*<li>
+                                        <a href="@Url.Action("AddNewGame","Home")">Новая игра</a>
+                                    </li>*@
+                                    <li>
+                                        <a href="@Url.Action("LogOff", "Home")">Выйти</a>
+                                    </li>
+                                }
+                                else
+                                {
 
-                                </li>
-                                <li>
-                                    <a href="@Url.Action("About","Home")">Регистрация</a>
-                                </li>
-                                <li>
-                                    <a href="#">Новая игра</a>
-                                </li>
-                                <li>
-                                    <a href="#">Выйти</a>
-                                </li>
+                                    <li>
+                                        <a href="@Url.Action("Index","Home")">
+                                            Главная
+                                        </a>
 
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("LogIn","Home")">
+                                            Войти / Зарегистрироваться
+                                        </a>
+
+                                    </li>
+
+                                }
+                                
                             </ul>
 
                         </nav>
@@ -139,28 +153,7 @@
         </div>
 
 
-        <!-- PAGE TOP -->
-        <section class="page-title">
-            <div class="container">
-
-                <header>
-
-                    <ul class="breadcrumb">
-                        <!-- breadcrumb -->
-                        <li><a href="#">Pages</a></li>
-                        <li class="active">Empty Page</li>
-                    </ul><!-- /breadcrumb -->
-
-                    <h2>
-                        <!-- Page Title -->
-                        <strong>Empty</strong> Page
-                    </h2><!-- /Page Title -->
-
-                </header>
-
-            </div>
-        </section>
-        <!-- /PAGE TOP -->
+  
         <!-- CONTENT -->
         <section>
             <div class="container">
@@ -185,17 +178,12 @@
         <a href="#" id="toTop"></a>
 
     </div><!-- /#wrapper -->
-
-
-
-
-
-            <!-- JAVASCRIPT FILES -->
+    <!-- JAVASCRIPT FILES -->
     @*-2.1.4.min*@
-            <script type="text/javascript" src="/assets/plugins/jquery.js"></script>
-            <script type="text/javascript" src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-            <script type="text/javascript" src="/assets/js/scripts.js"></script>
-            <script type="text/javascript" src="/assets/js/jquery.maskedinput.js"></script>
+    <script type="text/javascript" src="/assets/plugins/jquery.js"></script>
+    <script type="text/javascript" src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/js/scripts.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.maskedinput.js"></script>
 
     @RenderSection("js", false)
 

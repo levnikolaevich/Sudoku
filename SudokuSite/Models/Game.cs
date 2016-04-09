@@ -14,12 +14,21 @@ namespace SudokuSite.Models
     
     public partial class Game
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Game()
+        {
+            this.Point = new HashSet<Point>();
+        }
+    
         public int Id { get; set; }
-        public int IdField { get; set; }
         public int IdUser { get; set; }
         public System.DateTime CreationDate { get; set; }
+        public bool Status { get; set; }
+        public int IdLevel { get; set; }
     
-        public virtual Field Field { get; set; }
         public virtual User User { get; set; }
+        public virtual Level Level { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Point> Point { get; set; }
     }
 }

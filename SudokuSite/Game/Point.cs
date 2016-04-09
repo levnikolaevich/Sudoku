@@ -1,8 +1,9 @@
 ﻿using System;
+using SudokuSite.Models;
 
-namespace SudokuSite.Game
+namespace SudokuSite.Game1
 {
-    public class Point : ICloneable
+    public partial class Point : ICloneable
     {
 
         //------------------members----------------------------------------------------------------------------

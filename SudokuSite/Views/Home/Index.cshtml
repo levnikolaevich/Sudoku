@@ -1,4 +1,4 @@
-﻿@using SudokuSite.Game;
+﻿@using SudokuSite.Models;
 
 @{
     ViewBag.Title = "Home Page";
@@ -10,15 +10,17 @@
     <!-- FORM -->
     <div class="col-md-8">
 
-        <h3>Drop us a line or just say <strong><em>Hello!</em></strong></h3>
-
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <h3 style="padding-left: 16px;">Хотите сохранить результат? <strong>Авторизуйтесь!</strong></h3>
+        }
         <!-- Alert -->
         <div id="_sent_ok_" class="alert alert-success fade in fsize16 hide">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
             <span id="_msg_txt_"><strong>Thank You!</strong> Your message successfully sent!</span>
         </div><!-- /Alert -->
 
-      
+
         <form id="contactForm" action="/Home/Array" method="post" enctype="multipart/form-data">
 
             @{
@@ -34,52 +36,45 @@
 
                     int u = 0;
 
-            <div class="row">
-                <div class="form-group" @(o == y / 3 ? Html.Raw("") : Html.Raw("style=" + '\u0022' + "border-top: 2px solid #ccc; padding-top: 20px;" + '\u0022'))>
+                    <div class="row">
+                        <div class="form-group" @(o == y / 3 ? Html.Raw("") : Html.Raw("style=" + '\u0022' + "border-top: 2px solid #ccc; padding-top: 20px;" + '\u0022'))>
 
 
-                    @for (int x = 0; x < 9; x++)
+                            @for (int x = 0; x < 9; x++)
                             {
 
-                            <div class="col-md-1" @(u == x / 3 ? Html.Raw("") : Html.Raw("style=" + '\u0022' + "border-left: 2px solid #ccc; margin-right: 10px; padding-left: 20px; padding-right: 10px;" + '\u0022'))>
+                                <div class="col-md-1" @(u == x / 3 ? Html.Raw("") : Html.Raw("style=" + '\u0022' + "border-left: 2px solid #ccc; margin-right: 10px; padding-left: 20px; padding-right: 10px;" + '\u0022'))>
 
-                                @if (dictP[x + "" + y].Visibled)
+                                    @if (dictP[x + "" + y].Visibled)
                                     {
-                                    <p style="margin-bottom: 0px; text-align: center; margin-top: 7px; font-size: 45px; min-height: 32px;">@dictP[x + "" + y].Value</p>
-                                    <input id="point@(x)@(y)" style="display: none;" type="text" class="form-control" name="points" value="@dictP[x + "" + y].Value">
-
-                                }
-                                else
-                                {
-                                    @*<input id="check@(x)@(y)" style="display:none;" type="text" value="@dictP[x + "" + y].Value">*@
-                                    <input id="point@(x)@(y)" style="padding-left: 3px; padding-right: 3px; font-size: 25px; text-align: center; vertical-align:central;" type="text" class="form-control" name="points" >
-                                    @*<input style="padding-left: 3px; padding-right: 3px; font-size: 35px; text-align: center; vertical-align:central;" type="text" pattern="%" data-msg-required="" maxlength="100" class="form-control" name="contact_name" id="contact_name">*@
+                                        <p style="margin-bottom: 0px; text-align: center; margin-top: 7px; font-size: 45px; min-height: 32px;">@dictP[x + "" + y].Value</p>
+                                        <input id="point@(x)@(y)" style="display: none;" type="text" class="form-control" name="points" value="@dictP[x + "" + y].Value">
 
                                     }
-                            </div>
+                                    else
+                                    {
+                                        <input id="check@(x)@(y)" style="display: none;" type="text" class="form-control" value="@dictP[x + "" + y].Value">
+                                        <input class="form-control" data-msg-required id="point@(x)@(y)" onkeyup="srav('check@(x)@(y)','point@(x)@(y)');" style="padding-left: 3px; padding-right: 3px; font-size: 25px; text-align: center; vertical-align:central;" type="text" name="points" @*@(User.Identity.IsAuthenticated ? "" : "disabled" )*@>
+
+                                    }
+                                </div>
 
 
                                 u = x / 3;
                             }
 
-                    <div class="col-md-3"></div>
+                            <div class="col-md-3"></div>
 
-
-
-                </div>
-            </div>
+                        </div>
+                    </div>
                     o = y / 3;
-
                 }
-
-
             }
 
-            <input type="submit" value="Проверить" />
+            @*<input type="submit" value="Проверить" />*@
 
         </form>
-
-        @*<a href="#" onclick="srav();">Сравнить</a>*@
+      
 
     </div>
     <!-- /FORM -->
@@ -125,33 +120,43 @@
         $(function () {
             //2. Получить элемент, к которому необходимо добавить маску
 
-           for (var z = 0; z < 9; z++) {
+            for (var z = 0; z < 9; z++) {
 
-            for (var i = 0; i < 9; i++) {
-
-                //alert("#point" + i + z);
-                $("#point"+i+z).mask("9");
-            
-                @*var check_@(i+ "" +z) = document.getElementById('diag_nap_uchr');
-                var diag_osn = document.getElementById('diag_osn');
-                if (diag_nap_uchr.value === diag_osn.value) {
-                    alert("Совпадение");*@
+                for (var i = 0; i < 9; i++) {
+                    $("#point" + i + z).mask("9");
                 }
 
             }
-            
-            
-
         });
-       
-        //$(function srav() {
 
-        //    var check00 = document.getElementById('check00');
-        //    var point00 = document.getElementById('point00');
-        //    if (check00.value === point00.value) {
-        //        alert("Совпадение");
-        //    }
-        //});
+        function srav(one, two) {
+            reset();
+
+            var check = document.getElementById(one);
+            var point = document.getElementById(two);
+            if (check.value == point.value) {                
+
+                point.setAttribute("style", "border: 1px solid green; padding-left: 3px; padding-right: 3px; font-size: 25px; text-align: center; vertical-align:central;");
+
+            }
+            else {
+                point.setAttribute("style", "border: 1px solid red; padding-left: 3px; padding-right: 3px; font-size: 25px; text-align: center; vertical-align:central;");
+            }
+
+            
+
+        }
+
+
+        function reset() {
+            Array.prototype.forEach.call(document.querySelectorAll('input[name=points]'), function (ths) {
+
+                if (ths.value == "" || ths.value == null) {
+             
+                    ths.setAttribute("style", "padding-left: 3px; padding-right: 3px; font-size: 25px; text-align: center; vertical-align:central;");
+                }
+            });
+        }
 
     </script>
 }

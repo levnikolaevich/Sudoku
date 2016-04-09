@@ -12,21 +12,19 @@ namespace SudokuSite.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Field
+    public partial class Level
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Field()
+        public Level()
         {
             this.Game = new HashSet<Game>();
-            this.Point = new HashSet<Point>();
         }
     
         public int Id { get; set; }
-        public System.DateTime CreationDate { get; set; }
+        public string Name { get; set; }
+        public int Value { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Game> Game { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Point> Point { get; set; }
     }
 }

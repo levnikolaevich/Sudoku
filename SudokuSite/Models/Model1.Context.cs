@@ -25,8 +25,8 @@ namespace SudokuSite.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Field> Field { get; set; }
         public virtual DbSet<Game> Game { get; set; }
+        public virtual DbSet<Level> Level { get; set; }
         public virtual DbSet<Point> Point { get; set; }
         public virtual DbSet<User> User { get; set; }
     }

@@ -4,5 +4,28 @@
 
 
 
+<input id="input123" type="text">
+<input id="input2" type="text">
+
+<input id="input123" type="text">
+<input id="input2" type="text">
+
+<input onclick="copyValueTo('input123', 'input2')" type="submit">
+
+
+@section js{
+    <script>
+        function copyValueTo(fromElem, toElemId) {
+
+            var elem = document.getElementById(fromElem).value;
+            var elem2 = document.getElementById(toElemId);
+            elem2.value = elem;
+
+            alert(elem);
+
+        }
+    </script>
+}
+
 
 

@@ -17,12 +17,12 @@ namespace SudokuSite.Models
         public int Id { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
-        public int IdField { get; set; }
+        public int IdGame { get; set; }
         public int Value { get; set; }
         public bool Visibled { get; set; }
         public bool Checked { get; set; }
         public bool Guessed { get; set; }
     
-        public virtual Field Field { get; set; }
+        public virtual Game Game { get; set; }
     }
 }
