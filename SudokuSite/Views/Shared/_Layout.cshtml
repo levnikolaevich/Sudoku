@@ -21,7 +21,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800&amp;subset=latin,latin-ext,cyrillic,cyrillic-ext" rel="stylesheet" type="text/css" />
 
     <!-- CORE CSS -->
-    <link href="/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/plugins/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="/assets/css/font-awesome.css" rel="stylesheet" type="text/css" />
     <link href="/assets/css/sky-forms.css" rel="stylesheet" type="text/css" />
     <link href="/assets/css/weather-icons.min.css" rel="stylesheet" type="text/css" />
@@ -111,13 +111,13 @@
                             -->
                             <ul id="topMain" class="nav nav-pills nav-main">
                                 <li>
-                                    <a href="/ttt">
+                                    <a href="@Url.Action("Index","Home")">
                                         Войти
                                     </a>
 
                                 </li>
                                 <li>
-                                    <a href="#">Регистрация</a>
+                                    <a href="@Url.Action("About","Home")">Регистрация</a>
                                 </li>
                                 <li>
                                     <a href="#">Новая игра</a>
@@ -185,12 +185,19 @@
         <a href="#" id="toTop"></a>
 
     </div><!-- /#wrapper -->
+
+
+
+
+
             <!-- JAVASCRIPT FILES -->
-            <script type="text/javascript" src="/assets/plugins/jquery-2.1.4.min.js"></script>
-
+    @*-2.1.4.min*@
+            <script type="text/javascript" src="/assets/plugins/jquery.js"></script>
             <script type="text/javascript" src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-
             <script type="text/javascript" src="/assets/js/scripts.js"></script>
+            <script type="text/javascript" src="/assets/js/jquery.maskedinput.js"></script>
+
+    @RenderSection("js", false)
 
 </body>
 </html>

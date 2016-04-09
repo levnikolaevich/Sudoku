@@ -1,10 +1,8 @@
-﻿@{
+﻿@using SudokuSite.Game;
+
+@{
     ViewBag.Title = "Home Page";
 }
-
-
-
-    
 
 
 <div class="row">
@@ -20,47 +18,73 @@
             <span id="_msg_txt_"><strong>Thank You!</strong> Your message successfully sent!</span>
         </div><!-- /Alert -->
 
-        <form id="contactForm" action="php/contact.php" method="post">
+      
+        <form id="contactForm" action="/Home/Array" method="post" enctype="multipart/form-data">
+
+            @{
+
+                Dictionary<string, Point> dictP = ViewBag.Points;
+                <input style="display: none;" name="idfield" value="idfield">
+
+
+                int o = 0;
+
+                for (int y = 0; y < 9; y++)
+                {
+
+                    int u = 0;
+
             <div class="row">
-                <div class="form-group">
-                    <div class="col-md-6">
-                        <label>Full Name *</label>
-                        <input required="" type="text" value="" data-msg-required="Please enter your name." maxlength="100" class="form-control" name="contact_name" id="contact_name">
-                    </div>
-                    <div class="col-md-6">
-                        <label>E-mail Address *</label>
-                        <input required="" type="email" value="" data-msg-required="Please enter your email address." data-msg-email="Please enter a valid email address." maxlength="100" class="form-control" name="contact_email" id="contact_email">
-                    </div>
+                <div class="form-group" @(o == y / 3 ? Html.Raw("") : Html.Raw("style=" + '\u0022' + "border-top: 2px solid #ccc; padding-top: 20px;" + '\u0022'))>
+
+
+                    @for (int x = 0; x < 9; x++)
+                            {
+
+                            <div class="col-md-1" @(u == x / 3 ? Html.Raw("") : Html.Raw("style=" + '\u0022' + "border-left: 2px solid #ccc; margin-right: 10px; padding-left: 20px; padding-right: 10px;" + '\u0022'))>
+
+                                @if (dictP[x + "" + y].Visibled)
+                                    {
+                                    <p style="margin-bottom: 0px; text-align: center; margin-top: 7px; font-size: 45px; min-height: 32px;">@dictP[x + "" + y].Value</p>
+                                    <input id="point@(x)@(y)" style="display: none;" type="text" class="form-control" name="points" value="@dictP[x + "" + y].Value">
+
+                                }
+                                else
+                                {
+                                    @*<input id="check@(x)@(y)" style="display:none;" type="text" value="@dictP[x + "" + y].Value">*@
+                                    <input id="point@(x)@(y)" style="padding-left: 3px; padding-right: 3px; font-size: 25px; text-align: center; vertical-align:central;" type="text" class="form-control" name="points" >
+                                    @*<input style="padding-left: 3px; padding-right: 3px; font-size: 35px; text-align: center; vertical-align:central;" type="text" pattern="%" data-msg-required="" maxlength="100" class="form-control" name="contact_name" id="contact_name">*@
+
+                                    }
+                            </div>
+
+
+                                u = x / 3;
+                            }
+
+                    <div class="col-md-3"></div>
+
+
+
                 </div>
             </div>
-            <div class="row">
-                <div class="form-group">
-                    <div class="col-md-12">
-                        <label>Subject</label>
-                        <input type="text" value="" data-msg-required="Please enter the subject." maxlength="100" class="form-control" name="contact_subject" id="contact_subject">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group">
-                    <div class="col-md-12">
-                        <label>Message *</label>
-                        <textarea required="" maxlength="5000" data-msg-required="Please enter your message." rows="10" class="form-control" name="contact_comment" id="contact_comment"></textarea>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <input class="hidden" type="text" name="captcha" id="captcha" value=""><!-- keep it hidden -->
-                    <input type="submit" value="Send Message" class="btn btn-primary btn-lg" id="contact_submit">
-                </div>
-            </div>
+                    o = y / 3;
+
+                }
+
+
+            }
+
+            <input type="submit" value="Проверить" />
+
         </form>
+
+        @*<a href="#" onclick="srav();">Сравнить</a>*@
 
     </div>
     <!-- /FORM -->
     <!-- INFO -->
-    <div class="col-md-4">
+    <div class="col-md-3">
 
         <h2>Visit Us</h2>
 
@@ -89,3 +113,45 @@
     <!-- /INFO -->
 
 </div>
+
+@section js{
+
+
+    <script type="text/javascript">
+        //Код jQuery, установливающий маску для ввода телефона элементу input
+        //1. После загрузки страницы,  когда все элементы будут доступны выполнить...
+
+
+        $(function () {
+            //2. Получить элемент, к которому необходимо добавить маску
+
+           for (var z = 0; z < 9; z++) {
+
+            for (var i = 0; i < 9; i++) {
+
+                //alert("#point" + i + z);
+                $("#point"+i+z).mask("9");
+            
+                @*var check_@(i+ "" +z) = document.getElementById('diag_nap_uchr');
+                var diag_osn = document.getElementById('diag_osn');
+                if (diag_nap_uchr.value === diag_osn.value) {
+                    alert("Совпадение");*@
+                }
+
+            }
+            
+            
+
+        });
+       
+        //$(function srav() {
+
+        //    var check00 = document.getElementById('check00');
+        //    var point00 = document.getElementById('point00');
+        //    if (check00.value === point00.value) {
+        //        alert("Совпадение");
+        //    }
+        //});
+
+    </script>
+}

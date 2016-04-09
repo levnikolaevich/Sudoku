@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SudokuSite.Game;
 
 namespace SudokuSite.Controllers
 {
@@ -10,21 +11,32 @@ namespace SudokuSite.Controllers
     {
         public ActionResult Index()
         {
+            Table t = new Table();
+            t.GenerateField();
+
+            ViewBag.Points = t.DictionaryPoint;
+
             return View();
         }
+
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
+           
             return View();
         }
 
-        public ActionResult Contact()
+        [HttpPost]
+        public string Array(List<string> points, int idfield)
         {
-            ViewBag.Message = "Your contact page.";
+            string fin = "";
+            for (int i = 0; i < points.Count; i++)
+            {
+                fin += points[i] + ";  ";
+            }
 
-            return View();
+            return fin;
         }
+
     }
 }
