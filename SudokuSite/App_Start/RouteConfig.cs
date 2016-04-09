@@ -13,11 +13,25 @@ namespace SudokuSite
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.LowercaseUrls = true;
+
+            routes.MapRoute(
+                name: "fincase",
+                url: "fincase/{action}/{id}",
+                defaults: new
+                {
+                    controller = "Home",
+                    action = "All",
+                    id = UrlParameter.Optional
+                }
+            );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
         }
     }
 }

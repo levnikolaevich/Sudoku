@@ -31,6 +31,7 @@ namespace SudokuSite.Controllers
                 }              
                  
                 ViewBag.Points = game.DictionaryPoint;
+                ViewBag.IdGame = game.Id;
             }
             else
             {                
@@ -126,7 +127,7 @@ namespace SudokuSite.Controllers
 
         #region Game
 
-        public void SaveGame(List<string> points, int idfield)
+        public void SaveGame(List<string> points, int idgame)
         {
             //_data.AddGame(t, user);
         }

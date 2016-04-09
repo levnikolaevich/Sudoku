@@ -12,23 +12,28 @@
 
         @if (!User.Identity.IsAuthenticated)
         {
-            <h3 style="padding-left: 16px;">Хотите сохранить результат? <strong>Авторизуйтесь!</strong></h3>
+            <h3 style="padding-left: 16px;padding-top: 10px;margin-bottom: 22px;">Хотите сохранять результаты игр? <strong>Авторизуйтесь!</strong></h3>
         }
-        <!-- Alert -->
+     
+        @*<!-- Alert -->
         <div id="_sent_ok_" class="alert alert-success fade in fsize16 hide">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
             <span id="_msg_txt_"><strong>Thank You!</strong> Your message successfully sent!</span>
-        </div><!-- /Alert -->
+        </div><!-- /Alert -->*@
 
 
-        <form id="contactForm" action="/Home/Array" method="post" enctype="multipart/form-data">
+        <form id="contactForm" action="/Home/SaveGame" method="post" enctype="multipart/form-data">
+            @if (User.Identity.IsAuthenticated)
+            {
+                @*<input type="submit" value="Проверить" />
+                <input style="display: none;" name="idgame" value="ViewBag.IdGame">*@
+            }
+            
 
             @{
 
                 Dictionary<string, Point> dictP = ViewBag.Points;
-                <input style="display: none;" name="idfield" value="idfield">
-
-
+                
                 int o = 0;
 
                 for (int y = 0; y < 9; y++)
@@ -81,13 +86,13 @@
     <!-- INFO -->
     <div class="col-md-3">
 
-        <h2>Visit Us</h2>
+        <h2 style="margin-bottom: 8px;">Правила игры</h2>
 
-        <p>
-            Lid est laborum dolo rumes fugats untras. Etharums ser quidem rerum facilis dolores nemis omnis fugats vitaes nemo minima rerums unsers sadips amets.
+        <p style="text-align: justify;">
+            Вам нужно найти все цифры на поле так, чтобы в одном блоке (горизонтальном, вертикальном или 3x3) цифра от 1 до 9 встречалась только 1 раз. 
         </p>
 
-        <div class="divider half-margins"><!-- divider --></div>
+        @*<div class="divider half-margins"><!-- divider --></div>
 
         <p>
             <span class="block"><strong><i class="fa fa-map-marker"></i> Address:</strong> Street Name, City Name, Country</span>
@@ -102,7 +107,7 @@
             <span class="block"><strong>Monday - Friday:</strong> 10am to 6pm</span>
             <span class="block"><strong>Saturday:</strong> 10am to 2pm</span>
             <span class="block"><strong>Sunday:</strong> Closed</span>
-        </p>
+        </p>*@
 
     </div>
     <!-- /INFO -->
@@ -119,6 +124,7 @@
 
         $(function () {
             //2. Получить элемент, к которому необходимо добавить маску
+            $.mask.definitions['9'] = '[1-9]';
 
             for (var z = 0; z < 9; z++) {
 
@@ -130,7 +136,7 @@
         });
 
         function srav(one, two) {
-            reset();
+            checker();
 
             var check = document.getElementById(one);
             var point = document.getElementById(two);
@@ -147,8 +153,7 @@
 
         }
 
-
-        function reset() {
+        function checker() {
             Array.prototype.forEach.call(document.querySelectorAll('input[name=points]'), function (ths) {
 
                 if (ths.value == "" || ths.value == null) {
