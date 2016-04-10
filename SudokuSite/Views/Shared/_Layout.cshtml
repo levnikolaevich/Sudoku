@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using SudokuSite.Models;
+<!DOCTYPE html>
 <!--[if IE 8]>			<html class="ie ie8"> <![endif]-->
 <!--[if IE 9]>			<html class="ie ie9"> <![endif]-->
 <!--[if gt IE 9]><!-->
@@ -110,37 +111,41 @@
                                 </li>
                             -->
                             <ul id="topMain" class="nav nav-pills nav-main">
-                               
-                             
-                        
-                                @if (User.Identity.IsAuthenticated)
-                                {
-                                    @*<li>
-                                        <a href="@Url.Action("AddNewGame","Home")">Новая игра</a>
-                                    </li>*@
-                                    <li>
-                                        <a href="@Url.Action("LogOff", "Home")">Выйти</a>
-                                    </li>
-                                }
-                                else
-                                {
 
-                                    <li>
-                                        <a href="@Url.Action("Index","Home")">
-                                            Главная
-                                        </a>
 
-                                    </li>
-                                    <li>
-                                        <a href="@Url.Action("LogIn","Home")">
-                                            Войти / Зарегистрироваться
-                                        </a>
 
-                                    </li>
+    @if (User.Identity.IsAuthenticated)
+    {
+        @*<li>
+                <a href="@Url.Action("AddNewGame","Home")">Новая игра</a>
+            </li>*@
+    BdData _data = new BdData();
+    <li>
+        <a>Здравствуй, @_data.GetUser(User.Identity.Name).Name !</a>
+    </li>
+    <li>
+        <a href="@Url.Action("LogOff", "Home")">Выйти</a>
+    </li>
+    }
+    else
+    {
 
-                                }
-                                
-                            </ul>
+    <li>
+        <a href="@Url.Action("Index","Home")">
+            Главная
+        </a>
+
+    </li>
+    <li>
+        <a href="@Url.Action("LogIn","Home")">
+            Войти / Зарегистрироваться
+        </a>
+
+    </li>
+
+    }
+
+</ul>
 
                         </nav>
                     </div>

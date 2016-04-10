@@ -12,9 +12,11 @@ namespace SudokuSite.Controllers
     {
         BdData _data = new BdData();
 
-        public ActionResult Index(string id, int? level, int? idgame)
+        public ActionResult Index()
         {
+            Random rand = new Random();
             Game game = new Game();
+           
 
             if (User.Identity.IsAuthenticated)
             {
@@ -26,16 +28,16 @@ namespace SudokuSite.Controllers
                 }
                 else
                 {
-                    game.GenerateField(2);
+                    game.GenerateField();
                     _data.AddGame(game, user);
-                }              
-                 
+                }
+
                 ViewBag.Points = game.DictionaryPoint;
                 ViewBag.IdGame = game.Id;
             }
             else
-            {                
-                game.GenerateField(2);               
+            {
+                game.GenerateField();
             }
 
             ViewBag.Points = game.DictionaryPoint;
@@ -45,17 +47,17 @@ namespace SudokuSite.Controllers
 
         public ActionResult About()
         {
-           
+
             return View();
         }
 
-        
+
 
 
         #region Login
         //[AllowAnonymous]
         public ActionResult LogIn()
-        {           
+        {
 
             if (Session["LogonListError"] != null)
             {
@@ -102,9 +104,9 @@ namespace SudokuSite.Controllers
             {
                 CreationDate = DateTime.Now,
                 Email = email.Trim(),
-                Password = password.Trim()                  
+                Password = password.Trim()
             };
-            
+
             if (name != null && name.Count() > 0)
             {
                 user.Name = name.Trim();
@@ -127,28 +129,86 @@ namespace SudokuSite.Controllers
 
         #region Game
 
-        public void SaveGame(List<string> points, int idgame)
+        public ActionResult NewGame(int idgame)
         {
-            //_data.AddGame(t, user);
+            Game game = _data.GetGame(idgame);
+            game.Status = true;
+
+            _data.UpdateGame(game);
+
+            return Redirect(Url.Action("Index", "Home"));
         }
 
-        public void DeleteGame(List<string> points, int idfield)
-        {
-            //_data.AddGame(t, user);
-        }
 
+        /// <summary>
+        /// Сохранить игру
+        /// </summary>
+        /// <param name="points"></param>
+        /// <param name="idgame"></param>
+        /// <returns></returns>
         [HttpPost]
-        public string Array(List<string> points, int idfield)
+        public ActionResult SaveGame(List<int?> points, int idgame)
         {
-            string fin = "";
-            for (int i = 0; i < points.Count; i++)
+
+            Game game = _data.GetGame(idgame);
+            Point p = new Point();
+
+            List<Point> pl = new List<Point>();
+
+            int i = 0;
+
+            for (int y = 0; y < 9; y++)
             {
-                fin += points[i] + ";  ";
+                for (int x = 0; x < 9; x++)
+                {
+                    p = (Point)game.DictionaryPoint[x + "" + y];
+
+                    if (points[i] != null)
+                    {
+                        if (p.Value == points[i].Value && !p.Visibled)
+                        {
+                            p.Value = points[i].Value;
+                            p.Visibled = true;
+                            p.Guessed = true;
+
+                            pl.Add(p);
+                            //_data.UpdatePoint(p);
+                        }
+                    }
+                    i++;
+                }
             }
 
-            return fin;
+            _data.UpdatePoint(pl);
+
+            return Redirect(Url.Action("Index", "Home"));
         }
 
+        /// <summary>
+        /// Открыть поле
+        /// </summary>
+        /// <param name="idgame">ID игры</param>
+        /// <returns></returns>
+        public ActionResult OpenField(int idgame)
+        {
+
+            Game game = _data.GetGame(idgame);
+
+            foreach (Point p in game.ListPoint)
+            {
+                if (!p.Visibled)
+                {
+                    p.Visibled = true;
+                    p.Guessed = true;
+                }
+            }
+
+            _data.UpdatePoint(game.ListPoint);
+
+            return Redirect(Url.Action("Index", "Home"));
+        }
+
+       
         #endregion 
     }
 }

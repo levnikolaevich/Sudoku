@@ -75,7 +75,7 @@ namespace SudokuSite.Models
         /// Создание игрового поля
         /// </summary>
         /// <param name="level"></param>
-        public void GenerateField(int level)
+        public void GenerateField()
         {
             Random rand = new Random();
 
@@ -105,7 +105,7 @@ namespace SudokuSite.Models
                 }
             }                     
 
-            for (int g = 0; g < 100; g++)
+            for (int g = 0; g < 250; g++)
             {
                 ChangeRow(rand.Next(0, 9), rand.Next(0, 9), true);
                 ChangeСolumn(rand.Next(0, 9), rand.Next(0, 9), true);
@@ -113,7 +113,7 @@ namespace SudokuSite.Models
                 ChangeHorizontalArea(rand.Next(0, 3), rand.Next(0, 3));
             }
 
-            SetUnvisiblePoint(level);
+            SetUnvisiblePoint();
         }
 
         public void FillDictionary()
@@ -201,16 +201,23 @@ namespace SudokuSite.Models
             }
         }
 
-        public void SetUnvisiblePoint(int level)
+        /// <summary>
+        /// Закрываем значение клеток
+        /// </summary>
+        /// <param name="level"></param>
+        public void SetUnvisiblePoint()
         {
-            int f;
             Random rand = new Random();
+            
+            int f;
+            //int level = rand.Next(2, 5);
 
             foreach (Point p in listP)
             {
-                f = rand.Next(1, level + 1);
+                //Random rand2 = new Random();
+                //f = ;
 
-                if (f == 1)
+                if (rand.Next(1, 3) == 1)
                 {
                     p.Visibled = false;
                 }

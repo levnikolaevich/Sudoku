@@ -79,6 +79,24 @@ namespace SudokuSite.Models
             _context.SaveChanges();
         }
 
+
+        public Game GetGame(int idgame)
+        {
+            try
+            {
+                Game game = _context.Game.Where(x => x.Id == idgame).First();
+
+                game.FillDictionary();
+
+                return game;
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+        }
+
         public Game GetLastGame(User user)
         {
             try
@@ -93,6 +111,22 @@ namespace SudokuSite.Models
             {
                 return null;
             }          
+        }
+
+
+        public void UpdatePoint(Point point)
+        {
+            _context.SaveChanges();
+        }
+
+        public void UpdatePoint(List<Point> pl)
+        {
+            _context.SaveChanges();
+        }
+
+        public void UpdateGame(Game game)
+        {
+            _context.SaveChanges();
         }
 
     }
