@@ -56,11 +56,11 @@
                                     {
                                         <p style="margin-bottom: 0px; text-align: center; margin-top: 7px; font-size: 45px; min-height: 32px; @(dictP[x + "" + y].Guessed ?  "color:lightgreen;"  : "")">@dictP[x + "" + y].Value</p>
                                         <input id="point@(x)@(y)" style="display: none;" type="text" class="form-control" name="points" value="@dictP[x + "" + y].Value">
-
+                                        <input id="check@(x)@(y)" name="checkpoints" style="display: none;" type="text" class="form-control" value="@dictP[x + "" + y].Value">
                                     }
                                     else
                                     {
-                                        <input id="check@(x)@(y)" style="display: none;" type="text" class="form-control" value="@dictP[x + "" + y].Value">
+                                        <input id="check@(x)@(y)" name="checkpoints" style="display: none;" type="text" class="form-control" value="@dictP[x + "" + y].Value">
                                         <input class="form-control" data-msg-required id="point@(x)@(y)" onkeyup="srav('check@(x)@(y)','point@(x)@(y)');" style="padding-left: 3px; padding-right: 3px; font-size: 25px; text-align: center; vertical-align:central;" type="text" name="points" @*@(User.Identity.IsAuthenticated ? "" : "disabled" )*@>
 
                                     }
@@ -90,24 +90,48 @@
 
         @if (User.Identity.IsAuthenticated)
         {
-            <label class="checkbox-inline" style="padding-top: 73px;">
-                <input type="checkbox" id="ch" value="option"> Подсказки
-            </label>
-                <div class="divider half-margins" style="margin-top: 15px; margin-bottom: 7px;"><!-- divider --></div>
+
+            <div class="row" style="padding-top: 73px;">
+                <div class="col-md-6">
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="ch" value="option"> Подсказки
+                    </label>
+
+                </div>
+                <div class="col-md-6">
+
+                    <button type="button" onclick="checkfield();" class="btn btn-sm btn-info pull-left">Проверить поле</button>
+                </div>
+
+            </div>
+            <div class="divider half-margins" style="margin-top: 15px; margin-bottom: 7px;"><!-- divider --></div>
+
         }
         else
         {
-            <label class="checkbox-inline" style="padding-top: 10px;">
-                <input type="checkbox" id="ch" value="option"> Подсказки
-            </label>
+            <div class="row" style="padding-top: 10px;">
+                <div class="col-md-6">
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="ch" value="option"> Подсказки
+                    </label>
+
+                </div>
+                <div class="col-md-6">
+
+                    <button type="button" onclick="checkfield();" class="btn btn-sm btn-info pull-left">Проверить поле</button>
+                </div>
+
+            </div>
+
             <div class="divider half-margins" style="margin-top: 15px; margin-bottom: 7px;"><!-- divider --></div>
+
         }
 
         <h2 style="margin-bottom: 8px;">Правила игры</h2>
 
         <p style="text-align: justify;">
             Вам нужно найти все цифры на поле так, чтобы в одном блоке (горизонтальном, вертикальном или 3x3) цифра от 1 до 9 встречалась только 1 раз.
-        </p>  
+        </p>
 
     </div>
     <!-- /INFO -->
@@ -144,6 +168,7 @@
                 if (check.value == point.value) {
 
                     point.setAttribute("style", "border: 1px solid green; padding-left: 3px; padding-right: 3px; font-size: 25px; text-align: center; vertical-align:central;");
+                    point.setAttribute("about", "1");
 
                 }
                 else {
@@ -155,13 +180,65 @@
         }
 
         function checker() {
+
+        
+
             Array.prototype.forEach.call(document.querySelectorAll('input[name=points]'), function (ths) {
 
                 if (ths.value == "" || ths.value == null) {
 
                     ths.setAttribute("style", "padding-left: 3px; padding-right: 3px; font-size: 25px; text-align: center; vertical-align:central;");
+                    //alert("Свершилось2!");
                 }
+                                
             });
+
+      
+
+        }
+
+
+        function checkfield() {
+
+            var a = [];
+            var i = 0;
+            var flag = true;
+
+            Array.prototype.forEach.call(document.querySelectorAll('input[name=checkpoints]'), function (ths) {
+
+                a[i] = ths.value;
+                i++;
+            });
+
+            i = 0;
+
+            Array.prototype.forEach.call(document.querySelectorAll('input[name=points]'), function (ths2) {
+
+                if (a[i] == ths2.value) {
+                    if (ths2.getAttribute('style') != 'display: none;' && ths2.value > 0) {
+                        ths2.setAttribute("style", "border: 1px solid green; padding-left: 3px; padding-right: 3px; font-size: 25px; text-align: center; vertical-align:central;");
+                        ths2.setAttribute("about", "1");
+                    }
+                }
+                else {
+                    if (ths2.getAttribute('style') != 'display: none;' && ths2.value > 0) {
+                        ths2.setAttribute("style", "border: 1px solid red; padding-left: 3px; padding-right: 3px; font-size: 25px; text-align: center; vertical-align:central;");
+
+                    }
+                }
+                i++;
+
+               
+               if (ths2.getAttribute('about') != '1' && ths2.getAttribute('style') != 'display: none;') {
+                        flag = false;                 
+                }
+             
+
+            });
+
+            if (flag) {
+                alert("Вы победили!");
+            }
         }
 
     </script>
